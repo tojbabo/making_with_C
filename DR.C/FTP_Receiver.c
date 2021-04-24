@@ -30,7 +30,6 @@ void Receiver_Directory_Request(SOCKET sock_, char* path_, char* target_) {
 }
 
 void _Convert_FileToLine(filedata* files, Painter** core) {
-
 	for (filedata* ptr = files; ptr != NULL; ptr = ptr->link) {
 		char* a = File2String(*ptr);
 		Painter_Input(*core, a);
@@ -51,21 +50,27 @@ void Receiver() {
 
 	filedata* _files = NULL;
 	send(sock, "!", 1, 0);
+	Painter* _core = NULL;
 
 	while (1) {
 		len = recv(sock, msg, PACKSZ, 0);
 		msg[len] = 0;
 		printf("msg is : %s[%d]\n", msg, len);
+
 		if (msg[0] == '!') {
 			autofree(_urpath);
 			_urpath = StringCopy(msg + 1);
 			_files = Receiver_Directory(sock);
 		}
 
-		Painter* _core = (Painter*)malloc(sizeof(Painter));
-		_core->line = NULL;
+		if (_files != NULL) {
+			//_core.free;
+			// 메모리 정리부분
 
-		_Convert_FileToLine(_files, &_core);
+			_core = (Painter*)malloc(sizeof(Painter));
+			_core->line = NULL;
+			_Convert_FileToLine(_files, &_core);
+		}
 
 		int select;
 		while (1) {
@@ -165,6 +170,12 @@ filedata* Receiver_Directory(SOCKET sock_) {
 	char msg[PACKSZ];
 	int msgsz;
 	filedata* _hptr = NULL;
+
+	msgsz = recv(sock_, msg, PACKSZ, 0);
+	msg[msgsz] = 0;
+	if (StringCompare(msg, "null") == COMPARE_SAME) {
+		return NULL;
+	}
 
 	while (1) {
 		msgsz = recv(sock_, msg, PACKSZ, 0);

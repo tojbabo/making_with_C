@@ -92,6 +92,18 @@ filedata GetFile(filedata* files_,int index_) {
 	}
 }
 
+int GetFileCount(filedata* files_) {
+	filedata* ptr = files_;
+	int count = 0;
+	
+	while (1) {
+		if (ptr == NULL) return count;
+
+		ptr = ptr->link;
+		count++;
+	}
+}
+
 void ShowDirectory(filedata* files_) {
 	filedata* ptr = files_;
 	while (1) {

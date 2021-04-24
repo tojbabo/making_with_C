@@ -23,6 +23,7 @@ SOCKET Ready(SOCKET sock, SOCKADDR_IN adr);
 struct sockaddr_in AdrInit(char* ip, int port);
 filedata* GetDirectory(char* path);
 filedata GetFile(filedata* files_,int index_);
+int GetFileCount(filedata* files_);
 void ShowDirectory(filedata* files);
 void FileData_Input(filedata** files, int index, char* name, int size);
 char* File2String(filedata file);

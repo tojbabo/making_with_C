@@ -124,30 +124,39 @@ void Sender_Data(SOCKET _sock, char* _path, char* _filename) {
 }
 
 // 디렉토리 목록 전달하는 함수
-void Sender_Directory(SOCKET _sock, filedata* _files){
-	filedata* ptr = _files;
+void Sender_Directory(SOCKET sock_, filedata* files_){
+	filedata* ptr = files_;
 	int len;
 	char msg[PACKSZ];
 	char ans[PACKSZ];
 
-	if (_files == NULL) {
-		send(_sock, "*dir is null", strlen("*dir is null"), 0);
+
+	if (ptr == NULL) {
+		send(sock_, "null", strlen("null"), 0);
 		return;
 	}
+	else {
+		int filecount = GetFileCount(ptr);
+		sprintf(msg, "%d", filecount);
+
+		send(sock_, msg, StringLength(msg), 0);
+	}
+
 
 	while (1)
 	{
 		if (ptr == NULL) {
-			send(_sock, "fin", 3, 0);
-			recv(_sock, msg, PACKSZ, 0);
+			send(sock_, "fin", 3, 0);
+			recv(sock_, msg, PACKSZ, 0);
 			break;
 		}
 
 		sprintf(msg, "%d,%s,%d", ptr->index, ptr->name, ptr->size);
+		//printf("msg is : %s", msg);
 
 		while (1) {
-			if (send(_sock, msg, StringLength(msg), 0) == -1) break;
-			len = recv(_sock, ans, PACKSZ, 0);
+			if (send(sock_, msg, StringLength(msg), 0) == -1) break;
+			len = recv(sock_, ans, PACKSZ, 0);
 			if (len == -1) break;
 
 			ans[len] = 0;
