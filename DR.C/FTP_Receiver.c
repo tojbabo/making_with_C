@@ -38,6 +38,7 @@ void _Convert_FileToLine(filedata* files, Painter** core) {
 
 // 수신자(클라이언트) 몸체
 void Receiver() {
+	printf("<<Receiver Start>>\n");
 	SOCKET sock = Receiver_Connector();
 	char msg[PACKSZ];
 	char* _mypath = StringCopy("C:\\Users\\OJJJ\\Desktop\\copy\\");

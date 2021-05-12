@@ -51,6 +51,9 @@
     <ClCompile Include="Paint.c">
       <Filter>소스 파일\FUNC</Filter>
     </ClCompile>
+    <ClCompile Include="Statics.c">
+      <Filter>소스 파일\FUNC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NumberConverter.h">
@@ -75,6 +78,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Paint.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Statics.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

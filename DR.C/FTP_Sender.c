@@ -2,6 +2,7 @@
 
 // 송신자(서버) 몸체
 void Sender() {
+	printf("<<Sender Start>>\n");
 	SOCKET sock = Sender_Connector();
 	char msg[PACKSZ];
 	char* _path = StringCopy("C:\\Users\\"/*\\OJJJ\\Desktop\\"*/);

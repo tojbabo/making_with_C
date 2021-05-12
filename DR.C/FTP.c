@@ -2,16 +2,16 @@
 
 
 void FTP_RUN() {
-	int flag;
+	/*int flag;
 	puts("1. Receiver / 2. Sender");
 	printf("Enter >> ");
-	scanf("%d", &flag);
-	if (flag == 1) {
+	scanf("%d", &flag);*/
+	//if (flag == 1) {
 		Receiver();
-	}
+	/*}
 	else {
 		Sender();
-	}
+	}*/
 }
 
 
